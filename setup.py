@@ -13,6 +13,7 @@ setup(
     zip_safe=False,
     version="0.1.0",
     packages=find_packages(),
+    include_package_data=True,
     license="Private",
     description="Django expense app",
     long_description=README,
@@ -22,6 +23,7 @@ setup(
     url='https://github.com/sukhbinder/django-exp',
     keywords=["expense", "django",
               "Dashboard", "api"],
+
     install_requires=["django"],
     classifiers=[
         "License :: OSI Approved :: MIT License",
