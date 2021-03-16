@@ -1,0 +1,19 @@
+{% extends 'exp/base.html' %}
+
+{% block title %}  Expense Listing {% endblock title %}
+
+{% block content %}
+
+<h1 class="mt-5" >{{ object.date }}</h1> 
+<p>{{ object.where }}</p> 
+<p>{{ object.amount }}</p> 
+<p>{{ object.tags }}</p> 
+<p>{{ object.how }}</p> 
+
+<p><a href={% url 'create-view' %}>Add expense</a></p>
+
+<p>
+    <a href={% url 'index' %}>List expense</a>
+</p>
+
+{% endblock content %}

@@ -1,0 +1,25 @@
+
+{% extends 'exp/base.html' %}
+
+{% block title %}  Update expense {% endblock title %}
+
+{% block content %}
+
+<br><br><br>
+
+<form method="POST" enctype="multipart/form-data"> 
+
+	<!-- Security token -->
+	{% csrf_token %} 
+
+	<!-- Using the formset -->
+	{{ form.as_p}} 
+    
+    
+	<input type="submit" value="Submit" class="btn btn-primary"> 
+</form> 
+
+
+<a href={% url 'index' %}>List expense</a>
+
+{% endblock content %}

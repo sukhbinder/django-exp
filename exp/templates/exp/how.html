@@ -1,0 +1,36 @@
+{% extends 'exp/base.html' %}
+
+{% block title %}  Expense Listing {% endblock title %}
+
+{% block content %}
+
+
+<h1 class="mt-5" >How</h1>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">How</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        
+    {% for obj in object_list %}
+    <tr>
+        <td>{{ obj.how|upper }}</td>
+            <td>{{ obj.total_amount }}</td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+
+<p><a href={% url 'create-view' %}>Add expense</a></p>
+
+<p>
+    <a href={% url 'index' %}>List expense</a>
+</p>
+
+{% endblock content %}

@@ -1,0 +1,54 @@
+{% extends 'exp/base.html' %}
+
+{% block title %}  Expense Listing {% endblock title %}
+
+{% block content %}
+
+
+<h1 class="mt-5" >Dashboard</h1>
+<p>
+<img src="data:image/png;base64,{{total_this_year}}" class="rounded float-left" width="400px">
+<img src="../static/exp/total_this_month.png" class="rounded float-right" width="400px">
+<img src="../static/exp/no_purchases_this_year.png" class="rounded float-left" width="400px">
+<img src="../static/exp/no_purchases_this_month.png" class="rounded float-right" width="400px">
+
+
+<img src="../static/exp/month.png" class="rounded float-left" width="500px">
+<img src="../static/exp/week.png" class="rounded float-right" width="500px">
+
+<img src="../static/exp/top5thismonth.png" class="rounded float-left" width="500px">
+<img src="../static/exp/last10days.png" class="rounded float-right" width="500px">
+
+<img src="../static/exp/top10thisyear.png" class="img-fluid" width="100%" height="250px">
+
+<img src="../static/exp/days.png" class="img-fluid" width="100%" height="250px">
+
+
+</p>
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Where</th>
+        <th scope="col">Amount</th>
+      </tr>
+    </thead>
+    <tbody>
+
+        
+    {% for obj in object_list %}
+    <tr>
+        <td>{{ obj.where|upper }}</td>
+            <td>{{ obj.total_amount }}</td>
+        </tr>
+    {% endfor %}
+</tbody>
+</table>
+
+
+<p><a href={% url 'create-view' %}>Add expense</a></p>
+
+<p>
+    <a href={% url 'index' %}>List expense</a>
+</p>
+
+{% endblock content %}
