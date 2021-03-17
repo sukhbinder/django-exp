@@ -36,6 +36,6 @@ INSTALLED_APPS = [
 
 # Demo
 
-
+![](img/expense_slow.gif)
 
 
