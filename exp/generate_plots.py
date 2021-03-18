@@ -97,8 +97,8 @@ def generate_plot(tdata):
         datadict["last10days_in"] = last10days_in
         plt.close()
 
-    total_this_year = round(data.AMOUNT.sum(),2)
-    total_this_month = round(thismonth.AMOUNT.sum(),2)
+    total_this_year = round(data.AMOUNT.sum(), 2)
+    total_this_month = round(thismonth.AMOUNT.sum(), 2)
     no_purchases_this_month = thismonth.AMOUNT.count()
     no_purchases_this_year = data.AMOUNT.count()
 

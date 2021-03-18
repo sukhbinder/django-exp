@@ -1,54 +1,54 @@
 {% extends 'exp/base.html' %}
 
-{% block title %}  Expense Listing {% endblock title %}
+{% block title %} Expense Listing {% endblock title %}
 
 {% block content %}
 
 
-<h1 class="mt-5" >Expenses</h1>
+<h1 class="mt-5">Expenses</h1>
 <p>
   <a href={% url 'create-view' %}>Add expense</a>
 </p>
 
-  {% if expense_list %}
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Date</th>
-        <th scope="col">Amount</th>
-        <th scope="col">Where</th>
-        <th scope="col">Tags</th>
-        <th scope="col">How</th>
-        <th scope="col">Month</th>
-      </tr>
-    </thead>
-    <tbody>
+{% if expense_list %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Where</th>
+      <th scope="col">Tags</th>
+      <th scope="col">How</th>
+      <th scope="col">Month</th>
+    </tr>
+  </thead>
+  <tbody>
 
-  <!-- <ul class="list-group"> -->
+    <!-- <ul class="list-group"> -->
     {% for exp in expense_list %}
-      <!-- <li class="list-group-item"> -->
-        <tr>
-          <td><a href="{{ exp.get_absolute_url }}">{{ exp.date }}</a></td>
-        
-        <td> {{exp.amount}} </td>
-        <td> <a href="{{ exp.get_where_url }}">  {{exp.where}} </a></td>
-        <td>
-          {{exp.tags}}</td>
-          <td>
-            {{exp.how}}</td>
-            <td> <a href="{{ exp.get_month_year_url }}">{{exp.date|date:"F"}}</a></td>
+    <!-- <li class="list-group-item"> -->
+    <tr>
+      <td><a href="{{ exp.get_absolute_url }}">{{ exp.date }}</a></td>
 
-          </tr>
-      <!-- </li> -->
+      <td> {{exp.amount}} </td>
+      <td> <a href="{{ exp.get_where_url }}"> {{exp.where}} </a></td>
+      <td>
+        {{exp.tags}}</td>
+      <td>
+        {{exp.how}}</td>
+      <td> <a href="{{ exp.get_month_year_url }}">{{exp.date|date:"F"}}</a></td>
+
+    </tr>
+    <!-- </li> -->
     {% endfor %}
   </tbody>
 </table>
 
-  <!-- </ul> -->
-  {% else %}
-    <p>There are no expense in the library.</p>
-  {% endif %}  
+<!-- </ul> -->
+{% else %}
+<p>There are no expense in the library.</p>
+{% endif %}
 
-  <a href={% url 'create-view' %}>Add expense</a>
-  
-  {% endblock content %}
+<a href={% url 'create-view' %}>Add expense</a>
+
+{% endblock content %}

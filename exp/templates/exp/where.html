@@ -1,35 +1,37 @@
 {% extends 'exp/base.html' %}
 
-{% block title %}  Expense Listing for {{ object_list.0.where|upper }} {% endblock title %}
+{% block title %} Expense Listing for {{ object_list.0.where|upper }} {% endblock title %}
 
 {% block content %}
 
-<h1 class="mt-5" >{{ object_list.0.where|upper }}</h1>
+<h1 class="mt-5">{{ object_list.0.where|upper }}</h1>
 
 <!-- <ul class="list-group"> -->
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Tags</th>
-            <th scope="col">How</th>
-          </tr>
-        </thead>
-        <tbody>
-{% for object in object_list %}
-<tr>
-    <td><a href="{{ object.get_absolute_url }}">{{ object.date }}</a> </td> <td>  {{ object.amount }} </td> <td> {{object.tags }} </td>
-    <td> {{object.how }} </td>
-{% endfor %}
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">Date</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Tags</th>
+      <th scope="col">How</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for object in object_list %}
+    <tr>
+      <td><a href="{{ object.get_absolute_url }}">{{ object.date }}</a> </td>
+      <td> {{ object.amount }} </td>
+      <td> {{object.tags }} </td>
+      <td> {{object.how }} </td>
+      {% endfor %}
 
-<!-- </ul> -->
-</tbody>
+      <!-- </ul> -->
+  </tbody>
 </table>
 <p><a href={% url 'create-view' %}>Add expense</a></p>
 
 <p>
-    <a href={% url 'index' %}>List expense</a>
+  <a href={% url 'index' %}>List expense</a>
 </p>
 
 {% endblock content %}
