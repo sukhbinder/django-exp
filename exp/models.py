@@ -23,3 +23,9 @@ class Expense(models.Model):
 
     def get_month_year_url(self):
         return reverse('year-month', args=[str(self.date.year), str(self.date.month)])
+
+    def get_month_year_export_url(self):
+        return reverse("ym-export-view", args=[str(self.date.year), str(self.date.month)])
+    
+    def get_month_year_dash_url(self):
+        return reverse("ym-dash-view", args=[str(self.date.year), str(self.date.month)])
