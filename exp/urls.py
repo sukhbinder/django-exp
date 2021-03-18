@@ -28,6 +28,7 @@ urlpatterns = [
     path('how', views.ExpenseHowView.as_view(), name="how"),
     path('exp/<int:year>/<int:month>', views.YearMonthView.as_view(), name="year-month"),
     path('exp/<int:year>/<int:month>/export', views.export_view, name="ym-export-view"),
+    path('exp/<int:year>/<int:month>/dashboard', views.YearMonthExpenseAggView.as_view(), name="ym-dash-view"),
     path('api/expenses/', views.ExpenseAPIView.as_view()),
 
 ]

@@ -19,7 +19,7 @@
         <tbody>
 {% for object in object_list %}
 <tr>
-    <td>{{ object.date }} </td> <td>  {{ object.amount }} </td> <td> {{object.tags }} </td>
+    <td><a href="{{ object.get_absolute_url }}">{{ object.date }}</a> </td> <td>  {{ object.amount }} </td> <td> {{object.tags }} </td>
     <td> {{object.how }} </td>
 {% endfor %}
 

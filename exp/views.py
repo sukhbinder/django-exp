@@ -15,6 +15,16 @@ import csv
 from django.http import HttpResponse
 from rest_framework import generics, filters
 
+
+def get_plot_data(year=None, month=None):
+
+        if year is None and month is None:
+            alldata= Expense.objects.all().order_by("-date")
+        else:
+            alldata = Expense.objects.filter(date__year=year, date__month=month).order_by('-date')
+        df = generate_plots_with_data(alldata)
+        dd=generate_plot(df)
+        return dd
 class ExpenseAPIView(generics.ListCreateAPIView):
     search_fields = ["where", "amount", "tags", "how"]
     filter_backends = (filters.SearchFilter,)
@@ -31,16 +41,22 @@ class ExpenseAggView(ListView):
     model = Expense
     template_name = "exp/agg.html"
 
-    
-    # def get_queryset(self):
-    #     return Expense.objects.values("where").annotate(total_amount=Sum('amount')).order_by('-total_amount')
     def get_context_data(self, **kwargs):
-        alldata= Expense.objects.all().order_by("-date")
-        df = generate_plots_with_data(alldata)
-        dd=generate_plot(df)
         context = super().get_context_data(**kwargs)
         context["aggdata"] = Expense.objects.values("where").annotate(total_amount=Sum('amount')).order_by('-total_amount')  
-        context["imgdata"] = dd
+        context["imgdata"] = get_plot_data()
+        return context
+
+class YearMonthExpenseAggView(ListView):
+    model = Expense
+    template_name = "exp/agg.html"
+
+    def get_context_data(self, **kwargs):
+        year = self.kwargs['year']
+        month = self.kwargs['month']
+        context = super().get_context_data(**kwargs)
+        context["aggdata"] = Expense.objects.values("where").annotate(total_amount=Sum('amount')).order_by('-total_amount')  
+        context["imgdata"] = get_plot_data(year, month)
         return context
 
 class YearMonthView(ListView):
