@@ -31,13 +31,18 @@ class ExpenseAggView(ListView):
     model = Expense
     template_name = "exp/agg.html"
 
-    alldata= Expense.objects.all().order_by("-date")
-    df = generate_plots_with_data(alldata)
-    dd=generate_plot(df)
-
-    def get_queryset(self):
-        return Expense.objects.values("where").annotate(total_amount=Sum('amount')).order_by('-total_amount')
     
+    # def get_queryset(self):
+    #     return Expense.objects.values("where").annotate(total_amount=Sum('amount')).order_by('-total_amount')
+    def get_context_data(self, **kwargs):
+        alldata= Expense.objects.all().order_by("-date")
+        df = generate_plots_with_data(alldata)
+        dd=generate_plot(df)
+        context = super().get_context_data(**kwargs)
+        context["aggdata"] = Expense.objects.values("where").annotate(total_amount=Sum('amount')).order_by('-total_amount')  
+        context["imgdata"] = dd
+        return context
+
 class YearMonthView(ListView):
     model = Expense
     template_name = "exp/index.html"

@@ -1,54 +1,54 @@
 {% extends 'exp/base.html' %}
 
-{% block title %}  Expense Listing {% endblock title %}
+{% block title %} Expense Listing {% endblock title %}
 
 {% block content %}
 
 
-<h1 class="mt-5" >Dashboard</h1>
+<h1 class="mt-5">Dashboard</h1>
 <p>
-<img src="../static/exp/total_this_year.png" class="rounded float-left" width="400px">
-<img src="../static/exp/total_this_month.png" class="rounded float-right" width="400px">
-<img src="../static/exp/no_purchases_this_year.png" class="rounded float-left" width="400px">
-<img src="../static/exp/no_purchases_this_month.png" class="rounded float-right" width="400px">
+  <img src="data:image/png;base64,{{ imgdata.total_year }}" class="rounded float-left" width="400px">
+  <img src="data:image/png;base64,{{ imgdata.total_month }}" class="rounded float-right" width="400px">
+  <img src="data:image/png;base64,{{ imgdata.no_of_purchase }}" class="rounded float-left" width="400px">
+  <img src="data:image/png;base64,{{ imgdata.no_of_purchase_this_month }}" class="rounded float-right" width="400px">
 
 
-<img src="../static/exp/month.png" class="rounded float-left" width="500px">
-<img src="../static/exp/week.png" class="rounded float-right" width="500px">
+  <img src="data:image/png;base64,{{ imgdata.monthly_spend }}" class="rounded float-left" width="500px">
+  <img src="data:image/png;base64,{{ imgdata.weekly_spend }}" class="rounded float-right" width="500px">
 
-<img src="../static/exp/top5thismonth.png" class="rounded float-left" width="500px">
-<img src="../static/exp/last10days.png" class="rounded float-right" width="500px">
+  <img src="data:image/png;base64,{{ imgdata.top5thismonth }}" class="rounded float-left" width="500px">
+  <img src="data:image/png;base64,{{ imgdata.last10days_in }}" class="rounded float-right" width="500px">
 
-<img src="../static/exp/top10thisyear.png" class="img-fluid" width="100%" height="250px">
+  <img src="data:image/png;base64,{{ imgdata.top10year }}" class="img-fluid" width="100%" height="250px">
 
-<img src="../static/exp/days.png" class="img-fluid" width="100%" height="250px">
+  <img src="data:image/png;base64,{{ imgdata.month_trend }}" class="img-fluid" width="100%" height="250px">
 
 
 </p>
 <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Where</th>
-        <th scope="col">Amount</th>
-      </tr>
-    </thead>
-    <tbody>
-
-        
-    {% for obj in object_list %}
+  <thead>
     <tr>
-        <td>{{ obj.where|upper }}</td>
-            <td>{{ obj.total_amount }}</td>
-        </tr>
+      <th scope="col">Where</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+    {% for obj in aggdata %}
+    <tr>
+      <td>{{ obj.where|upper }}</td>
+      <td>{{ obj.total_amount }}</td>
+    </tr>
     {% endfor %}
-</tbody>
+  </tbody>
 </table>
 
 
 <p><a href={% url 'create-view' %}>Add expense</a></p>
 
 <p>
-    <a href={% url 'index' %}>List expense</a>
+  <a href={% url 'index' %}>List expense</a>
 </p>
 
 {% endblock content %}
