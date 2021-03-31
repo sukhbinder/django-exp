@@ -12,7 +12,7 @@ from exp.models import Expense
 from exp.serializer import ExpenseSerializer
 
 import csv
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from rest_framework import generics, filters
 
 
@@ -138,3 +138,8 @@ def export_view_internal(data, filename="expense_export.csv"):
     for row in data:
         writer.writerow([row.date, row.where, row.amount,  row.tags, row.how])
     return response
+
+def json_where(request):
+    return JsonResponse(list(set([exp1.where for exp1 in Expense.objects.all()])), safe=False)
+
+    

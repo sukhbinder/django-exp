@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
+from rest_framework import VERSION
 
 from exp import views
 
@@ -33,5 +34,6 @@ urlpatterns = [
     path('exp/<int:year>/<int:month>/dashboard',
          views.YearMonthExpenseAggView.as_view(), name="ym-dash-view"),
     path('api/expenses/', views.ExpenseAPIView.as_view()),
+    path("api/cat/", views.json_where, name="json_where"),
 
 ]
