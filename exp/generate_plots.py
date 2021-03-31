@@ -81,7 +81,7 @@ def generate_plot(tdata):
         plt.close()
 
     lastday = data.index.dayofyear.max()
-    tenthday = lastday-10
+    tenthday = lastday-30
 
     last10days = data[data.index.dayofyear >= tenthday]
     last10group = last10days.groupby(last10days.index.dayofyear)
@@ -90,7 +90,7 @@ def generate_plot(tdata):
     with plt.xkcd():
         ax = last10group.sum().plot.bar(rot=0, color="yellow", alpha=0.8)
         ax.hlines(lmean, -10, 500, linestyles="dashed")
-        ax.set_title("Last 10 days")
+        ax.set_title("Last 30 days")
         # plt.savefig(os.path.join(static_path,"last10days.png"))
         fig = plt.gcf()
         last10days_in = get_base64_string(fig)
