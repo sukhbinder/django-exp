@@ -4,13 +4,32 @@ from django.utils import timezone
 
 # Create your models here.
 
+class WhereCategory(models.Model):
+    name = models.CharField(max_length=100, default="LOCALSHOP", unique=True)
+
+    def __str__(self):
+        return self.name
+    
+    def __lt__(self, other):
+        return self.__str__() < other.__str__()
+    
+class HowCategory(models.Model):
+    name = models.CharField(max_length=100, default="CASH", unique=True)
+
+    def __str__(self):
+        return self.name
+
+    def __lt__(self, other):
+        return self.__str__() < other.__str__()
 
 class Expense(models.Model):
     date = models.DateField(default=timezone.now)
-    where = models.CharField(max_length=100)
+    # where = models.CharField(max_length=100)
+    where = models.ForeignKey(WhereCategory, on_delete=models.CASCADE)
     amount = models.FloatField(default=0.0)
     tags = models.CharField(max_length=500)
-    how = models.CharField(max_length=100, default="")
+    # how = models.CharField(max_length=100, default="")
+    how = models.ForeignKey(HowCategory, on_delete=models.CASCADE, related_name="how")
 
     def __str__(self):
         return "{}-{} {} {}".format(self.date, self.amount, self.where, self.tags, self.how)

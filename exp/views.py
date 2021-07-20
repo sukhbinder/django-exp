@@ -7,7 +7,7 @@ from django.views.generic.edit import CreateView
 from django.db.models import Sum
 
 from exp.generate_plots import generate_plots_with_data, generate_plot
-from exp.models import Expense
+from exp.models import Expense, HowCategory, WhereCategory
 
 from exp.serializer import ExpenseSerializer
 
@@ -25,6 +25,18 @@ def get_plot_data(year=None, month=None):
     df = generate_plots_with_data(alldata)
     dd = generate_plot(df)
     return dd
+
+
+class HowCategoryCreateView(CreateView):
+    model = HowCategory
+    fields = "__all__"
+    success_url = "/"
+
+
+class WhereCategoryCreateView(CreateView):
+    model = WhereCategory
+    fields = "__all__"
+    success_url = "/"
 
 
 class ExpenseAPIView(generics.ListCreateAPIView):
@@ -69,7 +81,7 @@ class YearMonthExpenseAggView(ListView):
 
 class YearMonthView(ListView):
     model = Expense
-    template_name = "exp/index.html"
+    template_name = "exp/yearmonthindex.html"
 
     def get_queryset(self):
         year = self.kwargs['year']
@@ -92,7 +104,7 @@ class ExpenseWhereView(ListView):
 
     def get_queryset(self):
         where = self.kwargs['where']
-        return Expense.objects.filter(where__iexact=where).order_by('-date')
+        return Expense.objects.filter(where__name__iexact=where).order_by('-date')
 
 
 class ExpenseDetailView(DetailView):
@@ -139,7 +151,6 @@ def export_view_internal(data, filename="expense_export.csv"):
         writer.writerow([row.date, row.where, row.amount,  row.tags, row.how])
     return response
 
+
 def json_where(request):
     return JsonResponse(list(set([exp1.where for exp1 in Expense.objects.all()])), safe=False)
-
-    

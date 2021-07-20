@@ -35,5 +35,7 @@ urlpatterns = [
          views.YearMonthExpenseAggView.as_view(), name="ym-dash-view"),
     path('api/expenses/', views.ExpenseAPIView.as_view()),
     path("api/cat/", views.json_where, name="json_where"),
+    path('where/add', views.WhereCategoryCreateView.as_view(), name="where-create-view"),
+    path('how/add', views.HowCategoryCreateView.as_view(), name="how-create-view"),
 
 ]

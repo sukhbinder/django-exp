@@ -1,4 +1,3 @@
-
 {% extends 'exp/base.html' %}
 
 {% block title %}  Update expense {% endblock title %}
@@ -6,7 +5,10 @@
 {% block content %}
 <br><br><br><br>	
 <div>
+<div>
+<h2>Add Where Category</h2>
 
+</div>
 <form method="POST" enctype="multipart/form-data"> 
 
 	<!-- Security token -->
@@ -21,9 +23,10 @@
 
 </div>
 <div>
-	<br>
-	<a class="btn btn-primary btn-lg " role="button" aria-pressed="true" href={% url 'index' %}>List expense</a>
-	<a class="btn btn-primary btn-lg green" role="button" aria-pressed="true"href={% url 'where-create-view' %}>Add Where Category</a>
-	<a class="btn btn-primary btn-lg " role="button" aria-pressed="true" href={% url 'how-create-view' %}>Add How Category</a>
+    <br>
+    <a class="btn btn-primary btn-lg " role="button" aria-pressed="true" href={% url 'index' %}>List expense</a>
+    <a class="btn btn-primary btn-lg " role="button" aria-pressed="true" href={% url 'how-create-view' %}>Add How Category</a>
 </div>
+
+
 {% endblock content %}
