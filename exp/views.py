@@ -9,7 +9,7 @@ from django.db.models import Sum
 from exp.generate_plots import generate_plots_with_data, generate_plot
 from exp.models import Expense, HowCategory, WhereCategory
 
-from exp.serializer import ExpenseSerializer
+from exp.serializer import ExpenseSerializer, WhereCategorySerializer, HowCategorySerializer
 
 import csv
 from django.http import HttpResponse, JsonResponse
@@ -42,6 +42,20 @@ class WhereCategoryCreateView(CreateView):
 class ExpenseAPIView(generics.ListCreateAPIView):
     search_fields = ["where", "amount", "tags", "how"]
     filter_backends = (filters.SearchFilter,)
+    queryset = Expense.objects.all()
+    serializer_class = ExpenseSerializer
+
+
+class WhereCategoryAPIView(generics.ListCreateAPIView):
+    queryset = WhereCategory.objects.all()
+    serializer_class = WhereCategorySerializer
+
+
+class HowCategoryAPIView(generics.ListCreateAPIView):
+    queryset = HowCategory.objects.all()
+    serializer_class = HowCategorySerializer
+
+class ExpenseAPIUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Expense.objects.all()
     serializer_class = ExpenseSerializer
 
